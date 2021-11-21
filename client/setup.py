@@ -1,84 +1,80 @@
 #! /usr/bin/env python3
 
-from os import system
 from random import shuffle
 from pyintercon import Client
+
+# get functions login, signup, submit, sendPlayLog and getQuestions, userConnection
+from utils.functions import *
+# get class Color and Style
+from utils.Class import *
 
 host = "localhost"
 port  = 8080
 
-class Color:
-	success = lambda _str: '\033[92m' + _str + '\033[0m'
-	danger = lambda _str: '\033[91m' + _str + '\033[0m'
-
-def getQuestions(cl, nb):
-    """ return question id and question label
-
-    """
-
-    req = {
-        "name": "quiz_questions",
-        "body": {
-            "nb": nb
-        }
-    }
-
-    res = cl.send(req)
-
-    return res["questions"]
-
-def submit(cl, q_id, answer):
-
-    req = {
-        "name": "submission",
-        "body": {
-            "question_id": q_id,
-            "answer": answer
-        }
-    }
-
-    res = cl.send(req)
-
-    success = bool(res["success"])
-
-    return success
-
 def main():
-    cl = Client()
-    cl.connect(host, port)
+	cl = Client()
+	cl.connect(host, port)
 
-    nb_random_questions = 10
-    
-    print("QUIZY".center(40))
-    print()
+	title = "Welcome in QUIZY"
+	title = Style.bold(Style.underline(title))
+	print(title.center(100))
+	print()
 
-    questions = getQuestions(cl, nb_random_questions)
+	pseudo, password, best_score = userConnection(cl)
 
-    quiz_results = []
+	nb_random_questions = 10
+	continuous = True
 
-    i = 1
-    for id, question in questions:
-        print(f"Q{i}: {question}")
+	while continuous:
+		print()
+		print("Answer the questions:\n")
 
-        answer = input(">>> ")
+		print("Best score: " + Color.success(str(best_score)) + "\n")
 
-        success = submit(cl, id, answer)
+		quiz_id, questions = getQuestions(cl, nb_random_questions)
 
-        if success:
-            success_msg = Color.success("Right answer")
-        else:
-            success_msg = Color.danger("Wrong answer")
+		score = int()
+		quiz_results = []
+		
+		i = 1
+		for id, question in questions:
+			print(f"Q{i}: {question}")
 
-        print(success_msg)
+			answer = input(">>> ")
 
-        quiz_results.append(["Wrong", "Right"][success])
+			success = submit(cl, quiz_id, id, answer)
 
-        # system("clear")
-        print()
+			if success:
+				success_msg = Style.bold(Color.success("Right answer"))
+				score += 10
+			else:
+				success_msg = Style.bold(Color.danger("Wrong answer"))
+				score -= 5
 
-        i += 1
+			print(success_msg)
+			print()
 
-    print(quiz_results)
+			quiz_results.append(["Wrong", "Right"][success])
+
+			i += 1
+		
+		# set score to 0 if he is negative
+		score = max(score, 0)
+		
+		print(f"Score: {score}")
+
+		if score > best_score:
+			print("Congratulation: new score (best score)")
+			best_score = score
+		
+		# add logs
+		res = sendPlayLog(cl, pseudo, password, host, quiz_id, score)
+
+		print(quiz_results)
+
+		redo = input("Redo ? (yes): ") or "yes" # set 'yes' as default
+
+		continuous = redo in ["yes", "y", "oui"]
 
 if __name__ == "__main__":
-    main()
+	main()
