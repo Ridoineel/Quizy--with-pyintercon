@@ -5,15 +5,18 @@ from random import shuffle
 from pyintercon import Client
 
 host = "localhost"
-port  = 8081
+port  = 8080
 
-def getQuestions(cl):
+def getQuestions(cl, nb):
     """ return question id and question label
 
     """
 
     req = {
-        "name": "quiz_questions"
+        "name": "quiz_questions",
+        "body": {
+            "nb": nb
+        }
     }
 
     res = cl.send(req)
@@ -40,13 +43,12 @@ def main():
     cl = Client()
     cl.connect(host, port)
 
-    print("QUIZYYYYY".center(40))
+    nb_random_questions = 10
+
+    print("QUIZY".center(40))
     print()
 
-    questions = getQuestions(cl)
-
-    # change questions order
-    shuffle(questions)
+    questions = getQuestions(cl, nb_random_questions)
 
     quiz_results = []
 
