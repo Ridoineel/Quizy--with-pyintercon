@@ -17,11 +17,8 @@ if not quizs_path:
 
 nb_quiz = len(quizs_path)
 
-# take random quiz
-random_quiz_id = random.randint(0, nb_quiz - 1)
-
-# Get Quiz datas & questions list
-quiz_path = quizs_path[random_quiz_id]
+# Get random Quiz datas & questions list
+quiz_path = random.choice(quizs_path)
 quiz_datas = json.load(open(quiz_path))
 quiz_questions = list(quiz_datas.keys())
 
