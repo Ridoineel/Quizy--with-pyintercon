@@ -33,13 +33,19 @@ total_questions = len(quiz_questions)
 # get the result of submission
 
 def getQuizQuestions(nb_questions):
+    if type(nb_questions) != int or nb_questions <= 0:
+        return []
+
     # (id, question)
     questions = list(enumerate(quiz_questions))
 
-    # return random {nb_questions} questions
+    # return random {nb_questions} questions (id, question)
     return random.sample(questions, min(nb_questions, total_questions))
 
 def result(question_id, answer):
+    if type(question_id) != int or not (0 <= question_id < total_questions):
+        return False
+
     answer = str(answer).strip()
 
     question = quiz_questions[question_id]
