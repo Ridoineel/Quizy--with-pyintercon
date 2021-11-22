@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
 import sqlite3
-import sys
 import os
+from functions import fileExist
 
 dirname = os.path.dirname(__file__)
 
-refresh = input("You want to sure to refresh databases ? (yes|no): ")
-
-if refresh in ["yes", "oui", "y"]:
-    # delete quizy.db
+def main():
+    # delete database
     if fileExist(f"{dirname}/quizy.db"):
         os.system(f"rm {dirname}/quizy.db")
 
@@ -17,26 +15,34 @@ if refresh in ["yes", "oui", "y"]:
     cur = con.cursor()
 
     cur.execute("""
-        CREATE TABLE User(
-                        pseudo varchar unique,
-                        password varchar(256),
-                        date varchar(256),
-                        last_view varchar(256),
-                        best_score integer,
-                        total_score integer
-                    )
+        CREATE TABLE 
+            User(
+                    pseudo varchar unique,
+                    password varchar(256),
+                    date varchar(256),
+                    last_view varchar(256),
+                    best_score integer,
+                    total_score integer
+                )
     """)
 
     cur.execute("""
-        CREATE TABLE PlayLog(
-                        player varchar,
-                        ip varchar(20),
-                        quiz_name varchar(256),
-                        score integer,
-                        date varchar(20)
-                    )
+        CREATE TABLE 
+            PlayLog(
+                    player varchar,
+                    ip varchar(20),
+                    quiz_name varchar(256),
+                    score integer,
+                    date varchar(20)
+                )
     """)
 
     con.commit()
 
     con.close()
+
+if __name__ == "__main__":
+    refresh = input("You want to sure to refresh databases ? (yes|no): ")
+
+    if refresh in ["yes", "oui", "y"]:
+        main()
