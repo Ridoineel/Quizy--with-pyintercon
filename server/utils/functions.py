@@ -79,7 +79,7 @@ def checkAuth(body):
 	
 	"""
 
-	pseudo = body.get("pseudo")
+	pseudo = body.get("pseudo").lower()
 	password = body.get("password")
 
 	if pseudo != None and password != None:
@@ -112,7 +112,7 @@ def createUser(body):
 	
 	"""
 
-	pseudo = body.get("pseudo")
+	pseudo = body.get("pseudo").lower()
 	password = body.get("password")
 
 	if pseudo != None and password != None:
@@ -142,7 +142,7 @@ def createUser(body):
 	return res
 
 def addPlayLog(body):
-	pseudo = body.get("pseudo")
+	pseudo = body.get("pseudo").lower()
 	password = body.get("password")
 	ip = body.get("ip")
 	quiz_id = body.get("quiz_id")
