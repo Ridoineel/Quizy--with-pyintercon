@@ -1,10 +1,12 @@
 import sys
 import os
+import pickle
 
 # do this to can import  utils.Class
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from utils.Class import Color
+from utils.variables import *
 
 def login(cl, pseudo, password):
 	req = {
@@ -35,7 +37,7 @@ def signup(cl, pseudo, password):
 def userConnection(cl):
 	haveAcct = input("Already have account ? (yes): ") or "yes" # set 'yes' as default
 	
-	pseudo = input("Your pseudo: ")
+	pseudo = input("Pseudo: ")
 	password = input("Password: ")
 
 	if haveAcct in ["yes", "y", "oui"]:
@@ -50,7 +52,9 @@ def userConnection(cl):
 		# redo
 		return userConnection(cl)
 	else:
-		return res["pseudo"], password, res["best_score"]
+		best_score = res["best_score"]
+
+		return pseudo, password, best_score
 
 def sendPlayLog(cl, pseudo, password, ip, quiz_id, score):
 	req = {
@@ -101,3 +105,33 @@ def submit(cl, quiz_id, q_id, answer):
 	success = bool(res["success"])
 
 	return success
+
+
+def saveLocal(pseudo, password):
+	obj = {
+		"pseudo": pseudo,
+		"password": password
+	}
+
+	with open(storage_file_path, "wb") as file:
+		registration = pickle.Pickler(file)
+
+		registration.dump(obj)
+
+def getStateDatas():
+	datas = {}
+	storage_filename = "local_storage.data"
+
+	if fileExist(storage_file_path):
+		with open(storage_file_path, "rb") as file:
+			registration = pickle.Unpickler(file)
+
+			datas = registration.load()
+	
+	return datas
+	
+def fileExist(path):
+	return os.system(f"ls {path}") == 0
+
+# def createFile(path):
+# 	os.system(f"touch {path}")
