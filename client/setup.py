@@ -9,7 +9,7 @@ from utils.functions import *
 # get class Color and Style
 from utils.Class import *
 # get local storage file path
-from utils.variables import storage_file_path
+from utils.variables import storage_file_path, nb_random_questions
 
 host = "localhost"
 port  = 8080
@@ -31,7 +31,7 @@ def main():
 		pseudo = stateDatas["pseudo"]
 		password = stateDatas["password"]
 
-		cont = input(f"Continous with pseudo={pseudo} ? (yes): ") or "yes" # set 'yes' as default
+		cont = input(f"Continous with pseudo {Color.bold(pseudo)} ? (yes): ") or "yes" # set 'yes' as default
 
 		if cont in ["yes", "y", "oui", "o"]:
 			res = login(cl, pseudo, password)
@@ -55,7 +55,6 @@ def main():
 	# local save
 	saveLocal(pseudo, password)
 
-	nb_random_questions = 10
 	continuous = True
 
 	while continuous:

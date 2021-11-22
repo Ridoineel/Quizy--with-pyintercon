@@ -42,7 +42,7 @@ def main():
     con.close()
 
 if __name__ == "__main__":
-    refresh = input("You want to sure to refresh databases ? (yes|no): ")
+    refresh = input("Are you sure to refresh databases ? (yes|no): ")
 
     if refresh in ["yes", "oui", "y"]:
         main()
