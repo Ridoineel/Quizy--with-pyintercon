@@ -84,8 +84,8 @@ def checkAuth(body):
 
 	if pseudo != None and password != None:
 		if sqlRequests.isUser(pseudo, password):
-			best_score = sqlRequests.getUserScore(pseudo)
-			total_score = sqlRequests.getUserTotalScore(pseudo)
+			best_score = sqlRequests.getUserInfo(pseudo, "best_score")
+			total_score = sqlRequests.getUserInfo(pseudo, "total_score")
 
 			res = {
 				"status": 1,
@@ -108,7 +108,7 @@ def checkAuth(body):
 
 def createUser(body):
 	""" Create new user with pseudo and password,
-		and return response
+		and return response ("status", ...)
 	
 	"""
 
@@ -152,15 +152,20 @@ def addPlayLog(body):
 		date = datetime.datetime.now()
 		date = date.strftime("%m-%d-%Y %H:%M:%S")
 
-		best_score = sqlRequests.getUserScore(pseudo) 
-		quiz_name = quizs_path[quiz_id]
+		best_score = sqlRequests.getUserInfo(pseudo, "best_score") 
+		total_score = sqlRequests.getUserInfo(pseudo, "total_score")
+
+		quiz_name = filename(quizs_path[quiz_id])
 
 		if sqlRequests.isUser(pseudo, password):
+			total_score += score
+
 			sqlRequests.createLog(pseudo, ip, quiz_name, score, date)
+			sqlRequests.updateUserInfo(pseudo, "total_score", total_score)
 
 			# Update user score if score > best_score
 			if score > best_score:
-				sqlRequests.updateScore(pseudo, score)
+				sqlRequests.updateUserInfo(pseudo, "best_score", score)
 
 			res = {"status": 1}
 		else:
@@ -172,3 +177,17 @@ def addPlayLog(body):
 		}
 
 	return res
+
+def filename(path):
+	path_rev = path[::-1]
+
+	# fisrt slash index in reverse mode
+	if "/" in path_rev:
+		slash_index = path_rev.index("/")
+	else:
+		slash_index = -1
+
+	name_rev = path_rev[:slash_index]
+	name = name_rev[::-1]
+
+	return name
