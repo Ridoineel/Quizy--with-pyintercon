@@ -8,7 +8,7 @@ cd Quizy--with-pyintercon
 
 ```
 
-This project contain two directories:
+This project contains two directories:
 * client
 * server
 
@@ -16,12 +16,16 @@ client for client configurations and server for server configurations
 
 So copy client directory once for player( client)
 
-> By default, number of player (client) set as 1 in server/setup.py main function
-> So, change it to change number of player
+> By default, number of players (client) set as 1 in server/setup.py main function
+> So, change it to change number of players
+___
+
+Quiz datas is in server/datas directory, json file.
+Add new quiz with json file
 
 ___
 
-> #### If user quit game, you must be restart server before he can restart.
+> #### If user quit game, you must be restart server before he can restart. Sorry, It will be resolved
 ___
 
 ### For server:
