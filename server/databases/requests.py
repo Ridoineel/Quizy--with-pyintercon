@@ -3,7 +3,7 @@ import os
 
 dirname = os.path.dirname(__file__)
 
-con = sqlite3.connect(f"{dirname}/User.db")
+con = sqlite3.connect(f"{dirname}/quizy.db")
 cur = con.cursor()
 
 def no_interference(value):
