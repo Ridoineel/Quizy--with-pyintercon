@@ -55,7 +55,7 @@ def userConnection(cl):
 		best_score = res["best_score"]
 		total_score = res["total_score"]
 
-		return pseudo, password, best_score, total_score
+		return pseudo.capitalize(), password, best_score, total_score
 
 def sendPlayLog(cl, pseudo, password, ip, quiz_id, score):
 	req = {
