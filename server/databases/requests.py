@@ -30,6 +30,21 @@ def isUser(pseudo, password):
 
     con.commit()
 
+def getUserInfo(pseudo, column):
+    assert no_interference(pseudo)
+
+    res = cur.execute(f"""
+        SELECT {column}
+        FROM User
+        WHERE pseudo='{pseudo}'
+    """)
+
+    con.commit()
+
+    value = list(res)[0][0]
+
+    return value
+
 def getUserScore(pseudo):
     assert no_interference(pseudo)
 
@@ -58,13 +73,13 @@ def getUserTotalScore(pseudo):
 
     return total_score
 
-def updateScore(pseudo, new_score):
+def updateUserInfo(pseudo, column, value):
 
-    assert no_interference(pseudo) and no_interference(new_score)
+    assert sum(map(no_interference, [pseudo, column, value])) == 3
 
     cur.execute(f"""
         UPDATE User
-        SET best_score={new_score}
+        SET {column}='{value}'
         WHERE pseudo='{pseudo}'
     """)
 
@@ -80,10 +95,12 @@ def createUser(pseudo, password, date):
             '{password}',
             '{date}',
             '{date}',
+            0,
             0
         )
     """)
     con.commit()
+
     print(f"New user {pseudo}")
 
 def createLog(pseudo, ip, quiz_name, score, date):
@@ -101,5 +118,12 @@ def createLog(pseudo, ip, quiz_name, score, date):
         )
     """)
     con.commit()
-    
+
     print(f"User: {pseudo}, ip: {ip}, quiz: {quiz_name}, score: {score}, date: {date}")
+
+# def getUsers(sorted_by="name")
+#     assert no_interference(sorted_by)
+
+#     cur.execute("""
+#         SELECT
+#     """)

@@ -13,7 +13,8 @@ if refresh in ["yes", "oui", "y"]:
     os.system(f"rm {dirname}/User.db")
 
 
-    con = sqlite3.connect(f"{dirname}/User.db")
+    con = sqlite3.connect(f"../server/databases/User.db")
+    print(con, f"{dirname}/User.db")
     cur = con.cursor()
 
     cur.execute("""
@@ -22,7 +23,8 @@ if refresh in ["yes", "oui", "y"]:
                         password varchar(256),
                         date varchar(256),
                         last_view varchar(256),
-                        best_score integer
+                        best_score integer,
+                        total_score integer
                     )
     """)
 
@@ -38,4 +40,4 @@ if refresh in ["yes", "oui", "y"]:
 
     con.commit()
 
-con.close()
+    con.close()
