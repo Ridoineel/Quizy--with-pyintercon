@@ -8,6 +8,8 @@ from pyintercon import Client
 from utils.functions import *
 # get class Color and Style
 from utils.Class import *
+# get local storage file path
+from utils.variables import storage_file_path
 
 host = "localhost"
 port  = 8080
@@ -33,6 +35,14 @@ def main():
 
 		if cont in ["yes", "y", "oui", "o"]:
 			res = login(cl, pseudo, password)
+
+			if res["status"] == 0:
+				# del storage file
+				os.system(f"rm {storage_file_path}")
+
+				print(Color.danger(res["message"]))
+				exit()
+
 
 			best_score = res["best_score"]
 			total_score = res["total_score"]
