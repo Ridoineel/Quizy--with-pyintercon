@@ -1,6 +1,7 @@
 import sys
 import os
 import pickle
+import getpass
 
 # do this to can import  utils.Class
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -36,9 +37,9 @@ def signup(cl, pseudo, password):
 
 def userConnection(cl):
 	haveAcct = input("Already have account ? (yes): ") or "yes" # set 'yes' as default
-	
+
 	pseudo = input("Pseudo: ")
-	password = input("Password: ")
+	password = getpass.getpass("Password: ")
 
 	if haveAcct in ["yes", "y", "oui"]:
 		res = login(cl, pseudo, password)
@@ -69,7 +70,7 @@ def sendPlayLog(cl, pseudo, password, ip, quiz_id, score):
 		}
 	}
 
-	
+
 	res = cl.send(req)
 
 	return res
@@ -128,9 +129,9 @@ def getStateDatas():
 			registration = pickle.Unpickler(file)
 
 			datas = registration.load()
-	
+
 	return datas
-	
+
 def fileExist(path):
 	try:
 		open(path, "r")
