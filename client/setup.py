@@ -47,7 +47,7 @@ def main():
 			best_score = res["best_score"]
 			total_score = res["total_score"]
 		else:
-			pseudo, password, best_score = userConnection(cl)
+			pseudo, password, best_score, total_score = userConnection(cl)
 	else:
 		# if user state datas not exist
 		pseudo, password, best_score, total_score = userConnection(cl)
