@@ -1,8 +1,16 @@
 import sqlite3
 import os
+import refresh
+
+from functions import fileExist
 
 dirname = os.path.dirname(__file__)
 
+# refresh (create) database if not exist
+if not fileExist(f"{dirname}/quizy.db"):
+    refresh.main()
+
+# connect to database
 con = sqlite3.connect(f"{dirname}/quizy.db")
 cur = con.cursor()
 
