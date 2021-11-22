@@ -132,7 +132,12 @@ def getStateDatas():
 	return datas
 	
 def fileExist(path):
-	return os.system(f"ls {path}") == 0
+	try:
+		open(path, "r")
+	except:
+		return False
+	else:
+		return True
 
 # def createFile(path):
 # 	os.system(f"touch {path}")
