@@ -31,7 +31,7 @@ def main():
 		pseudo = stateDatas["pseudo"]
 		password = stateDatas["password"]
 
-		cont = input(f"Continous with pseudo {Color.bold(pseudo)} ? (yes): ") or "yes" # set 'yes' as default
+		cont = input(f"Continous with pseudo {Style.bold(pseudo)} ? (yes): ") or "yes" # set 'yes' as default
 
 		if cont in ["yes", "y", "oui", "o"]:
 			res = login(cl, pseudo, password)

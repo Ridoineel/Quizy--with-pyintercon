@@ -1,5 +1,9 @@
 import sqlite3
 import os
+import sys
+
+
+sys.path.append(os.path.dirname(__file__))
 import refresh
 
 from functions import fileExist
@@ -72,8 +76,8 @@ def getUserTotalScore(pseudo):
     assert no_interference(pseudo)
 
     res = cur.execute(f"""
-        SELECT SUM(score) 
-        FROM PlayLog 
+        SELECT SUM(score)
+        FROM PlayLog
         WHERE player='{pseudo}'
     """)
 
@@ -138,7 +142,7 @@ def getUsers(sorted_by="pseudo", desc=True):
     assert no_interference(sorted_by)
 
     res = cur.execute(f"""
-        SELECT * 
+        SELECT *
         FROM User
         ORDER BY {sorted_by}
         {'desc' if desc else ''}
