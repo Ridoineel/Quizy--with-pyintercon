@@ -45,6 +45,19 @@ def getUserScore(pseudo):
 
     return score
 
+def getUserTotalScore(pseudo):
+    assert no_interference(pseudo)
+
+    res = cur.execute(f"""
+        SELECT SUM(score) 
+        FROM PlayLog 
+        WHERE player='{pseudo}'
+    """)
+
+    total_score = list(res)[0][0]
+
+    return total_score
+
 def updateScore(pseudo, new_score):
 
     assert no_interference(pseudo) and no_interference(new_score)
@@ -88,5 +101,5 @@ def createLog(pseudo, ip, quiz_name, score, date):
         )
     """)
     con.commit()
-    print("New log:")
-    print("User: {pseudo}, ip: {ip}, quiz: {quiz_name}, score: {score}, date: {date}")
+    
+    print(f"User: {pseudo}, ip: {ip}, quiz: {quiz_name}, score: {score}, date: {date}")

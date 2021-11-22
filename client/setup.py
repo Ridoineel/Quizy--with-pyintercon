@@ -33,12 +33,14 @@ def main():
 
 		if cont in ["yes", "y", "oui", "o"]:
 			res = login(cl, pseudo, password)
+
 			best_score = res["best_score"]
+			total_score = res["total_score"]
 		else:
 			pseudo, password, best_score = userConnection(cl)
 	else:
 		# if user state datas not exist
-		pseudo, password, best_score = userConnection(cl)
+		pseudo, password, best_score, total_score = userConnection(cl)
 
 	# local save
 	saveLocal(pseudo, password)
@@ -53,7 +55,9 @@ def main():
 		print()
 		print("Answer the questions:\n")
 
-		print("Best score: " + Color.success(str(best_score)) + "\n")
+		print("Total score: " + Color.success(str(total_score)))
+		print("Best score: " + Color.success(str(best_score)))
+		print()
 
 		quiz_id, questions = getQuestions(cl, nb_random_questions)
 
@@ -82,9 +86,6 @@ def main():
 
 			i += 1
 		
-		# set score to 0 if he is negative
-		score = max(score, 0)
-		
 		print(f"Score: {score}")
 
 		if score > best_score:
@@ -92,7 +93,11 @@ def main():
 					f"Congratulation. New score: {Style.bold(str(score))}"
 					))
 			)
+
 			best_score = score
+
+		# add score to total_score
+		total_score += score
 		
 		# add logs
 		res = sendPlayLog(cl, pseudo, password, host, quiz_id, score)

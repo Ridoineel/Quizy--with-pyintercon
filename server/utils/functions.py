@@ -85,11 +85,13 @@ def checkAuth(body):
 	if pseudo != None and password != None:
 		if sqlRequests.isUser(pseudo, password):
 			best_score = sqlRequests.getUserScore(pseudo)
+			total_score = sqlRequests.getUserTotalScore(pseudo)
 
 			res = {
 				"status": 1,
 				"pseudo": pseudo,
-				"best_score": best_score
+				"best_score": best_score,
+				"total_score": total_score
 			}
 		else:
 			res = {
@@ -128,7 +130,8 @@ def createUser(body):
 			res = {
 				"status": 1,
 				"pseudo": pseudo,
-				"best_score": 0
+				"best_score": 0,
+				"total_score": 0
 			}
 	else:
 		res = {
