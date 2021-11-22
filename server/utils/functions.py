@@ -160,8 +160,11 @@ def addPlayLog(body):
 		if sqlRequests.isUser(pseudo, password):
 			total_score += score
 
+			# create Log
 			sqlRequests.createLog(pseudo, ip, quiz_name, score, date)
+			# update user total score and user last_view date
 			sqlRequests.updateUserInfo(pseudo, "total_score", total_score)
+			sqlRequests.updateUserInfo(pseudo, "last_view", date)
 
 			# Update user score if score > best_score
 			if score > best_score:
