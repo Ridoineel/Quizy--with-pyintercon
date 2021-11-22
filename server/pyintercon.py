@@ -21,6 +21,7 @@ class Server:
 
     def __init__(self, nb_client: int = 1):
         self.nb_client = nb_client
+        self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         # set exit signal function
         signal.signal(signal.SIGINT, Server.exit)
@@ -54,10 +55,9 @@ class Server:
 
         """
 
-        con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        con.bind((ip, port))
+        self.con.bind((ip, port))
 
-        con.listen(self.nb_client)
+        self.con.listen(self.nb_client)
 
         # attribute localhost name to ip if
         # ip is empty
@@ -70,7 +70,7 @@ class Server:
 
         for _ in range( self.nb_client ):
             # accept client
-            client, param = con.accept()
+            client, param = self.con.accept()
             # set a client timeout for futur opération
             # on this: -> server waiting for receve request
             client.settimeout(.5)
@@ -85,7 +85,7 @@ class Server:
             for client, param in clients_list:
                 try:
                     # receve request datas
-                    req = client.recv(100).decode()
+                    req = client.recv(10**9).decode()
                     assert req
 
                 except AssertionError:
@@ -97,7 +97,7 @@ class Server:
                     rep = self.response(req)
                     client.send(str(rep).encode())
 
-        con.close()
+        self.con.close()
 
     @staticmethod
     def exit(signal, frame):
@@ -111,10 +111,10 @@ class Client:
 
     def __init__(self):
         self.status = {"connected": False}
+        self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self, ip: str, port: int):
         if not self.status["connected"]:
-            self.con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.con.connect((ip, port))
 
             self.status["connected"] = True
@@ -141,13 +141,17 @@ class Client:
 
             self.con.send(containt.encode())
 
-            rep = self.con.recv(1000)
+            rep = self.con.recv(10**9)
 
             return json_decode( rep.decode() )
 
         else:
             print("WARNING: Client not connected !!!")
 
+
 if __name__ == '__main__':
-    sv = Server(1)
-    sv.activate("", 8000)
+    print("""
+        Class:
+            Server: use to create server, accept client and answered client
+            Client: use to connect server and send it request
+    """)
