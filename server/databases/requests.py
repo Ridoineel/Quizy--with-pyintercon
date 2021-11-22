@@ -88,17 +88,22 @@ def updateUserInfo(pseudo, column, value):
 def createUser(pseudo, password, date):
     assert sum(map(no_interference, [pseudo, password, date])) == 3
 
-    cur.execute(f"""
-        INSERT INTO User
-        VALUES(
-            '{pseudo}',
-            '{password}',
-            '{date}',
-            '{date}',
-            0,
-            0
-        )
-    """)
+    try:
+        cur.execute(f"""
+            INSERT INTO User
+            VALUES(
+                '{pseudo}',
+                '{password}',
+                '{date}',
+                '{date}',
+                0,
+                0
+            )
+        """)
+    except sqlite3.IntegrityError as e:
+        print("Warning: ", e)
+        exit()
+
     con.commit()
 
     print(f"New user {pseudo}")
@@ -121,9 +126,13 @@ def createLog(pseudo, ip, quiz_name, score, date):
 
     print(f"User: {pseudo}, ip: {ip}, quiz: {quiz_name}, score: {score}, date: {date}")
 
-# def getUsers(sorted_by="name")
-#     assert no_interference(sorted_by)
+def getUsers(sorted_by="pseudo"):
+    assert no_interference(sorted_by)
 
-#     cur.execute("""
-#         SELECT
-#     """)
+    res = cur.execute(f"""
+        SELECT * 
+        FROM User
+        ORDER BY {sorted_by}
+    """)
+
+    return res
