@@ -126,13 +126,14 @@ def createLog(pseudo, ip, quiz_name, score, date):
 
     print(f"User: {pseudo}, ip: {ip}, quiz: {quiz_name}, score: {score}, date: {date}")
 
-def getUsers(sorted_by="pseudo"):
+def getUsers(sorted_by="pseudo", desc=True):
     assert no_interference(sorted_by)
 
     res = cur.execute(f"""
         SELECT * 
         FROM User
         ORDER BY {sorted_by}
+        {'desc' if desc else ''}
     """)
 
     return res
