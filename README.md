@@ -1,9 +1,10 @@
 # QUIZY. Simple quiz application using my Pyintercon module
 
-Do following command to get project or download it using the file button:
+Do following command to get project or download it using the button with labeled as "Code":
 
 ```bash
-git clone 
+git clone https://github.com/Ridoineel/Quizy--with-pyintercon.git
+cd Quizy--with-pyintercon
 
 ```
 
@@ -12,6 +13,8 @@ This project contain two directories:
 * server
 
 client for client configurations and server for server configurations
+
+So copy client directory once for player( client)
 
 > By default, number of player (client) set as 1 in server/setup.py main function
 > So, change it to change number of player
