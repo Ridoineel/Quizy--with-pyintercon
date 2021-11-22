@@ -191,3 +191,11 @@ def filename(path):
 	name = name_rev[::-1]
 
 	return name
+
+def fileExist(path):
+	try:
+		open(path, "r")
+	except:
+		return False
+	else:
+		return True
