@@ -6,11 +6,12 @@ import os
 
 dirname = os.path.dirname(__file__)
 
-refresh = input("You want sure to refresh databases ? (yes|no): ")
+refresh = input("You want to sure to refresh databases ? (yes|no): ")
 
 if refresh in ["yes", "oui", "y"]:
-    # delete User.db
-    os.system(f"rm {dirname}/quizy.db")
+    # delete quizy.db
+    if fileExist(f"{dirname}/quizy.db"):
+        os.system(f"rm {dirname}/quizy.db")
 
     con = sqlite3.connect(f"{dirname}/quizy.db")
     cur = con.cursor()
