@@ -61,9 +61,12 @@ def result(body):
 		quiz_questions = list(quiz_datas.keys())
 
 		question = quiz_questions[question_id]
-		right_answer = quiz_datas[question]
+		right_answers = quiz_datas[question] 
 
-		is_right = right_answer.lower() == answer.lower()
+		# convert all right answers in lower case
+		right_answers = [i.lower() for i in right_answers]
+
+		is_right = answer.lower() in right_answers
 
 		res = {"status": 1, "success": is_right}
 	else:
