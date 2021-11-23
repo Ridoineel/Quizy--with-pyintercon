@@ -5,7 +5,7 @@ from pyintercon import Server
 from utils.functions import *
 
 host = "localhost"
-port = 8080
+port = 8081
 
 funcs = {
 	"submission": result,

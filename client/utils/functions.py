@@ -139,5 +139,8 @@ def fileExist(path):
 	else:
 		return True
 
-# def createFile(path):
-# 	os.system(f"touch {path}")
+def createFile(path):
+	assert not fileExist(path)
+	
+	file = open(path, "w")
+	file.close()

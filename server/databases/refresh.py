@@ -9,7 +9,7 @@ dirname = os.path.dirname(__file__)
 def main():
     # delete database
     if fileExist(f"{dirname}/quizy.db"):
-        os.system(f"rm {dirname}/quizy.db")
+        os.remove(f"{dirname}/quizy.db")
 
     con = sqlite3.connect(f"{dirname}/quizy.db")
     cur = con.cursor()

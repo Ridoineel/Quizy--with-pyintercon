@@ -13,7 +13,7 @@ from utils.Class import *
 from utils.variables import storage_file_path, nb_random_questions
 
 host = "localhost"
-port  = 8080
+port  = 8081
 
 def main():
 	cl = Client()
@@ -40,7 +40,7 @@ def main():
 
 			if res["status"] == 0:
 				# del storage file
-				os.system(f"rm {storage_file_path}")
+				os.remove(storage_file_path)
 
 				print(Color.danger(res["message"]))
 				exit()
@@ -61,7 +61,7 @@ def main():
 
 	while continuous:
 		# clear console
-		os.system("clear")
+		os.system("cls||clear")
 
 		print()
 		print("Answer the questions:\n")
