@@ -25,18 +25,12 @@ Add new quiz with json file in this form.
 
 ```json
 {
-<<<<<<< HEAD
 	"question1":
 		["answer1", "answer2", "answerM"],
 	"question2":
 		["answer1", "answer2", "answerM"],
-
 	"questionnM":
 		["answer1", "answer2", "answerM"],
-=======
-	"question":
-		["answer1", "answer2", ...]
->>>>>>> 51c8dd7e3704701bb9c4cd94b266eb13ff346181
 }
 ```
 
