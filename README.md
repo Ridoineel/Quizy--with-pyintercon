@@ -21,7 +21,24 @@ So copy client directory once for player( client)
 ___
 
 Quiz datas is in server/datas directory, json file.
-Add new quiz with json file
+Add new quiz with json file in this form.
+
+```json
+{
+	"question1":
+		["answer1", "answer2", "answerM"],
+	"question2":
+		["answer1", "answer2", "answerM"],
+
+	"questionnM":
+		["answer1", "answer2", "answerM"],
+}
+```
+
+> The players get random questions, random numbers of questions from random quiz.
+the random number of questions is in client/utils/variables.py 10 by default **(edit it)**
+
+So you can put more than questions in one quiz (json file).
 
 ___
 
