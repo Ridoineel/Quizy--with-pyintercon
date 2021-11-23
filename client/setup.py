@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import os
+import getpass
 from random import shuffle
 from pyintercon import Client
 
@@ -29,11 +30,12 @@ def main():
 
 	if stateDatas:
 		pseudo = stateDatas["pseudo"]
-		password = stateDatas["password"]
 
 		cont = input(f"Continous with pseudo {Style.bold(pseudo)} ? (yes): ") or "yes" # set 'yes' as default
 
 		if cont in ["yes", "y", "oui", "o"]:
+			password = getpass.getpass("Password: ")
+
 			res = login(cl, pseudo, password)
 
 			if res["status"] == 0:
@@ -53,7 +55,7 @@ def main():
 		pseudo, password, best_score, total_score = userConnection(cl)
 
 	# local save
-	saveLocal(pseudo, password)
+	saveLocal(pseudo)
 
 	continuous = True
 

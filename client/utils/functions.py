@@ -109,10 +109,9 @@ def submit(cl, quiz_id, q_id, answer):
 	return success
 
 
-def saveLocal(pseudo, password):
+def saveLocal(pseudo):
 	obj = {
-		"pseudo": pseudo,
-		"password": password
+		"pseudo": pseudo
 	}
 
 	with open(storage_file_path, "wb") as file:
