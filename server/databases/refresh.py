@@ -7,11 +7,13 @@ from functions import fileExist
 dirname = os.path.dirname(__file__)
 
 def main():
+    db_path = os.path.join(dirname, "quizy.db")
+    
     # delete database
-    if fileExist(f"{dirname}/quizy.db"):
-        os.remove(f"{dirname}/quizy.db")
+    if fileExist(db_path):
+        os.remove(db_path)
 
-    con = sqlite3.connect(f"{dirname}/quizy.db")
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
 
     cur.execute("""

@@ -6,9 +6,11 @@ from os.path import isfile, join
 quizs_path = list()
 
 for file in listdir("datas"):
+	file_path = join("datas", file)
+
 	# filter the json files
-	if isfile(f"datas/{file}") and re.match(r"^.*\.json$", file) is not None:
-		quizs_path.append(f"datas/{file}")
+	if isfile(file_path) and re.match(r"^.*\.json$", file) is not None:
+		quizs_path.append(file_path)
 
 if not quizs_path:
 	print("Empty or missing datas directory")

@@ -10,12 +10,14 @@ from functions import fileExist
 
 dirname = os.path.dirname(__file__)
 
+db_path = os.path.join(dirname, "quizy.db")
+
 # refresh (create) database if not exist
-if not fileExist(f"{dirname}/quizy.db"):
+if not fileExist(db_path):
     refresh.main()
 
 # connect to database
-con = sqlite3.connect(f"{dirname}/quizy.db")
+con = sqlite3.connect(db_path)
 cur = con.cursor()
 
 def no_interference(value):
