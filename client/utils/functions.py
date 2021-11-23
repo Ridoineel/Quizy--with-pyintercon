@@ -121,7 +121,6 @@ def saveLocal(pseudo):
 
 def getStateDatas():
 	datas = {}
-	storage_filename = "local_storage.data"
 
 	if fileExist(storage_file_path):
 		with open(storage_file_path, "rb") as file:
