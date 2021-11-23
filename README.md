@@ -41,6 +41,10 @@ So you can put more than questions in one quiz (json file).
 
 ___
 
+> To refresh database, go to server/databases and run **refresh.py**
+___
+
+___
 > #### If user quit game, you must be restart server before he can restart. Sorry, It will be resolved
 ___
 
