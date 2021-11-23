@@ -1,7 +1,12 @@
 {
-    "Qui ne tente rien...": "n'a rien",
-    "Couleur de l'eau ?": "transparent",
-    "Quelle est le nom du principal acteur de Black Panther ?": "Chadwick Boseman",
-    "Tim Bernes Lee est le créateur de quelle langage ?": "HTML",
-    "Entre le C++ et le C#, quelle est le langage qui est sortie en premier ?": "C++"
+    "Qui ne tente rien...": 
+        ["n'a rien"],
+    "Couleur de l'eau ?": 
+        ["transparent"],
+    "Quel est le nom du principal acteur de Black Panther ?": 
+        ["Chadwick Boseman"],
+    "Tim Bernes Lee est le créateur de quel langage ?": 
+        ["HTML", "le HTML", "le langage html", "langage html"],
+    "Entre le C++ et le C#, quel est le langage qui est sortie en premier ?": 
+        ["C++", "le C++", "langage C++", "le langage C++"]
 }

@@ -1,5 +1,5 @@
 {
-    "Profession de Mickel Jordan ?": "Basketeur",
+    "Profession de Mickel Jordan ?": ["Basketeur", "Un basketeur"],
     "Age de Ridoine ?": "60",
-    "Python a été conçus par.. ?": "Guido van Rossum"
+    "Python a été conçus par.. ?": ["Guido van Rossum"]
 }
