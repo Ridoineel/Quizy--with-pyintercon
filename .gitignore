@@ -3,3 +3,4 @@ server/__pycache__
 server/utils/__pycache__ 
 server/databases/__pycache__
 client/utils/__pycache__ 
+client/storage/*.data
