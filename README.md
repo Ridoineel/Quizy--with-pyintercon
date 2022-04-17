@@ -1,6 +1,6 @@
 # QUIZY. Simple quiz application using my Pyintercon module
 
-Do following command to get project or download it using the button with labeled as "Code":
+Do following commands to get project or download it using the button with labeled as "Code":
 
 ```bash
 git clone https://github.com/Ridoineel/Quizy--with-pyintercon.git
@@ -12,7 +12,7 @@ This project contains two directories:
 * client
 * server
 
-client for client configurations and server for server configurations
+client for client configuration and server for server configurations
 
 So copy client directory once for player( client)
 
