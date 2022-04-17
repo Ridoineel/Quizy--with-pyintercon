@@ -2,5 +2,6 @@ client/__pycache__
 server/__pycache__
 server/utils/__pycache__ 
 server/databases/__pycache__
+server/databases/quizy.db
 client/utils/__pycache__ 
 client/storage/*.data
