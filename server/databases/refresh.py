@@ -13,7 +13,7 @@ def main():
     if fileExist(db_path):
         os.remove(db_path)
 
-    con = sqlite3.connect(db_path)
+    con = sqlite3.connect(db_path, check_same_thread=False)
     cur = con.cursor()
 
     cur.execute("""

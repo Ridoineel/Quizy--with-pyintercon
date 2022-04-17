@@ -17,7 +17,7 @@ if not fileExist(db_path):
     refresh.main()
 
 # connect to database
-con = sqlite3.connect(db_path)
+con = sqlite3.connect(db_path, check_same_thread=False)
 cur = con.cursor()
 
 def no_interference(value):
