@@ -15,7 +15,7 @@ funcs = {
 	"add_play_log": addPlayLog
 }
 
-def responseManager(request):
+def requestHandler(request):
 	name = request.get("name") # would be "submision" or "quiz_questions"
 	# default response
 	res = {
@@ -34,8 +34,8 @@ def responseManager(request):
 	return res
 
 def main():
-	sv = Server(1)
-	sv.treatment = responseManager
+	sv = Server()
+	sv.setRequestHandler(requestHandler)
 
 	sv.activate(host, port)
 
